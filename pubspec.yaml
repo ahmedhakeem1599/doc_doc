@@ -46,6 +46,11 @@ dependencies:
   # screen responsive
   flutter_screenutil: ^5.9.3
 
+  # SVG Picture
+  flutter_svg: ^2.2.3
+
+  gap: ^3.0.1
+
 
 dev_dependencies:
   flutter_test:
@@ -60,9 +65,9 @@ flutter:
 
   uses-material-design: true
 
-  #assets:
-    #- images/a_dot_burr.jpeg
-
+  assets:
+    - assets/svgs/
+    - assets/images/
 
 
   # fonts:
