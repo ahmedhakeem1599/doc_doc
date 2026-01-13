@@ -1,5 +1,3 @@
-import 'package:docdoc/core/theming/colors.dart';
-import 'package:docdoc/core/widgets/custom_Text.dart';
 import 'package:docdoc/feature/on_boarding/widgets/doc_logo_and_name.dart';
 import 'package:docdoc/feature/on_boarding/widgets/doctor_image_and_text.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import '../../core/helper/extentions.dart';
 import '../../core/routing/routes.dart';
-import '../../core/theming/styles.dart';
+import '../../core/widgets/app_material_button.dart';
 
 
 class OnBoardingScreen extends StatelessWidget {
@@ -26,19 +24,10 @@ class OnBoardingScreen extends StatelessWidget {
                 Gap(40.h),
                 const DoctorImageAndText(),
                 Gap(32.h),
-                MaterialButton(
+                AppMaterialButton(
                   onPressed: () => context.pushReplacementNamed(AppRouteString.loginScreen),
-                  height: 52.h,
-                  minWidth: 312.w,
-                  color: AppColor.mainBlue,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: CustomText(
-                    text: "Get Started",
-                    style: TextStyles.font16White600Wight,
-                  ),
-                ),
+                  text: "Get Started",
+                )
               ],
             ),
           ),
