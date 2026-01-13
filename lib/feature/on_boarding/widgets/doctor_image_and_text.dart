@@ -45,7 +45,7 @@ class DoctorImageAndText extends StatelessWidget {
         CustomText(
           text:
           "Manage and schedule all of your medical appointments \n easily with Docdoc to get a new experience.",
-          style: TextStyles.font10Gray400Wight.copyWith(height: 1.6),
+          style: TextStyles.font10GrayRegular.copyWith(height: 1.6),
           textAlign: TextAlign.center,
         ),
       ],
