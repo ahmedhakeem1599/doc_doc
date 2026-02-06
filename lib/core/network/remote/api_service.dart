@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import '../error/server_exceptions.dart';
 import 'dio_client.dart';
 
 class ApiService {
@@ -12,7 +13,9 @@ class ApiService {
     try {
       final response = await dioClient.dio.get(endPoint, queryParameters: queryParameters);
       return response;
-    } on DioException catch (e) {} catch (e) {}
+    } on DioException catch (e) {
+      return ServerExceptions.handleError(e);
+    }
   }
 
   /// Post Method
@@ -20,7 +23,9 @@ class ApiService {
     try {
       final response = await dioClient.dio.post(endPoint, data: data);
       return response;
-    } on DioException catch (e) {} catch (e) {}
+    } on DioException catch (e) {
+      return ServerExceptions.handleError(e);
+    }
   }
 
   /// Patch Method
@@ -28,7 +33,9 @@ class ApiService {
     try {
       final response = await dioClient.dio.patch(endPoint, data: data);
       return response;
-    } on DioException catch (e) {} catch (e) {}
+    } on DioException catch (e) {
+      return ServerExceptions.handleError(e);
+    }
   }
 
   /// Put Method
@@ -36,7 +43,9 @@ class ApiService {
     try {
       final response = await dioClient.dio.put(endPoint, data: data);
       return response;
-    } on DioException catch (e) {} catch (e) {}
+    } on DioException catch (e) {
+      return ServerExceptions.handleError(e);
+    }
   }
 
   /// Delete Method
@@ -44,7 +53,9 @@ class ApiService {
     try {
       final response = await dioClient.dio.delete(endPoint);
       return response;
-    } on DioException catch (e) {} catch (e) {}
+    } on DioException catch (e) {
+      return ServerExceptions.handleError(e);
+    }
   }
 
 }
