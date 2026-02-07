@@ -1,17 +1,17 @@
 import 'package:dio/dio.dart';
 import '../error/server_exceptions.dart';
-import 'dio_client.dart';
+import 'dio_factory.dart';
 
 class ApiService {
   /// Make instance from DioClient
-  final DioClient dioClient = DioClient();
+  final Dio dio = DioFactory.getDio();
 
   /// CRUD Methods
 
   /// Get Method
   Future<dynamic> get({required String endPoint, Map<String, dynamic>? queryParameters}) async {
     try {
-      final response = await dioClient.dio.get(endPoint, queryParameters: queryParameters);
+      final response = await dio.get(endPoint, queryParameters: queryParameters);
       return response;
     } on DioException catch (e) {
       return ServerExceptions.handleError(e);
@@ -21,7 +21,7 @@ class ApiService {
   /// Post Method
   Future<dynamic> post({required String endPoint, dynamic data}) async {
     try {
-      final response = await dioClient.dio.post(endPoint, data: data);
+      final response = await dio.post(endPoint, data: data);
       return response;
     } on DioException catch (e) {
       return ServerExceptions.handleError(e);
@@ -31,7 +31,7 @@ class ApiService {
   /// Patch Method
   Future<dynamic> updateOnceOrMore({required String endPoint, dynamic data}) async {
     try {
-      final response = await dioClient.dio.patch(endPoint, data: data);
+      final response = await dio.patch(endPoint, data: data);
       return response;
     } on DioException catch (e) {
       return ServerExceptions.handleError(e);
@@ -41,7 +41,7 @@ class ApiService {
   /// Put Method
   Future<dynamic> updateAll({required String endPoint, dynamic data}) async {
     try {
-      final response = await dioClient.dio.put(endPoint, data: data);
+      final response = await dio.put(endPoint, data: data);
       return response;
     } on DioException catch (e) {
       return ServerExceptions.handleError(e);
@@ -51,7 +51,7 @@ class ApiService {
   /// Delete Method
   Future<dynamic> delete({required String endPoint}) async {
     try {
-      final response = await dioClient.dio.delete(endPoint);
+      final response = await dio.delete(endPoint);
       return response;
     } on DioException catch (e) {
       return ServerExceptions.handleError(e);
