@@ -1,8 +1,8 @@
+import 'package:docdoc/core/helper/spacing.dart';
 import 'package:docdoc/feature/on_boarding/widgets/doc_logo_and_name.dart';
 import 'package:docdoc/feature/on_boarding/widgets/doctor_image_and_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 import '../../core/helper/extentions.dart';
 import '../../core/routing/routes.dart';
 import '../../core/widgets/app_material_button.dart';
@@ -21,12 +21,15 @@ class OnBoardingScreen extends StatelessWidget {
             child: Column(
               children: [
                 const DocLogoAndName(),
-                Gap(40.h),
+                VerticalSpace(40),
                 const DoctorImageAndText(),
-                Gap(32.h),
-                AppMaterialButton(
-                  onPressed: () => context.pushReplacementNamed(AppRouteString.loginScreen),
-                  text: "Get Started",
+                VerticalSpace(32),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 32.0.w),
+                  child: AppMaterialButton(
+                    onPressed: () => context.pushReplacementNamed(AppRouteString.loginScreen),
+                    text: "Get Started",
+                  ),
                 )
               ],
             ),
