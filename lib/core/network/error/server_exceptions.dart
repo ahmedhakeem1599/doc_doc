@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'error_model.dart';
 import 'failure.dart';
 
 class ServerExceptions {
@@ -7,69 +8,77 @@ class ServerExceptions {
     /// Check if Back-End Provides Error Message
     final data = error.response?.data;
 
-    if(data is Map<String, dynamic>){
-      final errorMessage = data['message'];
-      if(errorMessage != null){
-        return Failure(errorMessage: errorMessage);
-      }
+    if (data is Map<String, dynamic>) {
+      final errorModel = ErrorModel.fromJson(data);
+
+      return Failure(
+        message: errorModel.message,
+        statusCode: error.response?.statusCode,
+        errors: errorModel.errors,
+      );
+    }
+
+
+    if (error is Failure) {
+      return Failure(message: error.toString());
     }
 
     /// If Back-End Does Not Provide Error Message
     switch (error.type) {
       case DioExceptionType.connectionTimeout:
-        return Failure(errorMessage: "Connection timeout with API server");
+        return Failure(message: "Connection timeout with API server");
 
       case DioExceptionType.sendTimeout:
-        return Failure(errorMessage: "Send timeout with API server");
+        return Failure(message: "Send timeout with API server");
 
       case DioExceptionType.receiveTimeout:
-        return Failure(errorMessage: "Receive timeout with API server");
+        return Failure(message: "Receive timeout with API server");
 
       case DioExceptionType.connectionError:
-        return Failure(errorMessage: "No Internet connection, Please Check your Internet Connection",);
+        return Failure(message: "No Internet connection, Please Check your Internet Connection",);
 
       case DioExceptionType.badCertificate:
-        return Failure(errorMessage: "Invalid SSL certificate");
+        return Failure(message: "Invalid SSL certificate");
 
       case DioExceptionType.cancel:
-        return Failure(errorMessage: "Request to API server was cancelled");
+        return Failure(message: "Request to API server was cancelled");
 
       case DioExceptionType.badResponse:
         final statusCode = error.response?.statusCode ?? 0;
 
         switch (statusCode) {
           case 400:
-            return Failure(errorMessage: "Bad request");
+            return Failure(message: "Bad request");
           case 401:
-            return Failure(errorMessage: "Unauthorized access");
+            return Failure(message: "Unauthorized access");
           case 403:
-            return Failure(errorMessage: "Forbidden request");
+            return Failure(message: "Forbidden request");
           case 404:
-            return Failure(errorMessage: "Resource not found");
+            return Failure(message: "Resource not found");
           case 409:
-            return Failure(errorMessage: "Conflict with server data");
+            return Failure(message: "Conflict with server data");
           case 429:
-            return Failure(errorMessage: "Too many requests, please try again later.",);
+            return Failure(message: "Too many requests, please try again later.",);
           case 500:
-            return Failure(errorMessage: "Internal server error");
+            return Failure(message: "Internal server error");
           case 502:
-            return Failure(errorMessage: "Bad gateway");
+            return Failure(message: "Bad gateway");
           case 503:
-            return Failure(errorMessage: "Service unavailable");
+            return Failure(message: "Service unavailable");
           case 504:
-            return Failure(errorMessage: "Gateway timeout");
+            return Failure(message: "Gateway timeout");
           default:
             return Failure(
-              errorMessage: "Received invalid status code: $statusCode",
+              message: "Received invalid status code: $statusCode",
             );
         }
 
       case DioExceptionType.unknown:
         if (error.message != null && error.message!.contains("SocketException")) {
-          return Failure(errorMessage: "No Internet connection");
+          return Failure(message: "No Internet connection");
         }
         return Failure(
-          errorMessage: error.message ?? "Unexpected error occurred",
+          message: error.message ?? "Unexpected error occurred",
         );
     }
   }

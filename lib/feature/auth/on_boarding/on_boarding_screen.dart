@@ -1,11 +1,11 @@
 import 'package:docdoc/core/helper/spacing.dart';
-import 'package:docdoc/feature/on_boarding/widgets/doc_logo_and_name.dart';
-import 'package:docdoc/feature/on_boarding/widgets/doctor_image_and_text.dart';
+import 'package:docdoc/feature/auth/on_boarding/widgets/doc_logo_and_name.dart';
+import 'package:docdoc/feature/auth/on_boarding/widgets/doctor_image_and_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../core/helper/extentions.dart';
-import '../../core/routing/routes.dart';
-import '../../core/widgets/app_material_button.dart';
+import '../../../core/helper/extentions.dart';
+import '../../../core/routing/routes.dart';
+import '../../../core/widgets/app_material_button.dart';
 
 
 class OnBoardingScreen extends StatelessWidget {

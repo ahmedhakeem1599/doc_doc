@@ -1,11 +1,16 @@
 class Failure {
-  final String errorMessage;
+  final String message;
   final int? statusCode;
+  final Map<String, dynamic>? errors;
 
-  Failure({required this.errorMessage, this.statusCode});
+  Failure({
+    required this.message,
+    this.statusCode,
+    this.errors,
+  });
 
   @override
   String toString() {
-    return 'Failure(errMessage: $errorMessage, statusCode: $statusCode)';
+    return 'Failure(message: $message, statusCode: $statusCode)';
   }
 }

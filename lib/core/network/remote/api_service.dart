@@ -1,6 +1,4 @@
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import '../error/failure.dart';
 import '../error/server_exceptions.dart';
 import 'dio_factory.dart';
 
@@ -9,53 +7,65 @@ class ApiService {
 
   /// CRUD Methods
 
-  /// Get Method
-  Future<Either<Failure, Response>> get({required String endPoint, Map<String, dynamic>? queryParameters}) async {
+  /// GET
+  Future<Response<T>> get<T>({required String endPoint, Map<String, dynamic>? queryParameters,}) async {
     try {
-      final response = await dio.get(endPoint, queryParameters: queryParameters);
-      return Right(response);
+      final response = await dio.get<T>(
+        endPoint,
+        queryParameters: queryParameters,
+      );
+      return response;
     } on DioException catch (e) {
-      return Left(ServerExceptions.handleError(e));
+      throw ServerExceptions.handleError(e);
     }
   }
 
-  /// Post Method
-  Future<Either<Failure, Response>> post({required String endPoint, dynamic data}) async {
+  /// POST
+  Future<Response<T>> post<T>({required String endPoint, dynamic data}) async {
     try {
-      final response = await dio.post(endPoint, data: data);
-      return Right(response);
+      final response = await dio.post<T>(
+        endPoint,
+        data: data,
+      );
+      return response;
     } on DioException catch (e) {
-      return Left(ServerExceptions.handleError(e));
+      throw ServerExceptions.handleError(e);
     }
   }
 
-  /// Patch Method
-  Future<Either<Failure, Response>> updateOnceOrMore({required String endPoint, dynamic data}) async {
+  /// PATCH
+  Future<Response<T>> patch<T>({required String endPoint, dynamic data}) async {
     try {
-      final response = await dio.patch(endPoint, data: data);
-      return Right(response);
+      final response = await dio.patch<T>(
+        endPoint,
+        data: data,
+      );
+      return response;
     } on DioException catch (e) {
-      return Left(ServerExceptions.handleError(e));
+      throw ServerExceptions.handleError(e);
     }
   }
 
-  /// Put Method
-  Future<Either<Failure, Response>> updateAll({required String endPoint, dynamic data}) async {
+  /// Put
+  Future<Response<T>> put<T>({required String endPoint, dynamic data}) async {
     try {
-      final response = await dio.put(endPoint, data: data);
-      return Right(response);
+      final response = await dio.put<T>(
+        endPoint,
+        data: data,
+      );
+      return response;
     } on DioException catch (e) {
-      return Left(ServerExceptions.handleError(e));
+      throw ServerExceptions.handleError(e);
     }
   }
 
-  /// Delete Method
-  Future<Either<Failure, Response>> delete({required String endPoint}) async {
+  /// DELETE
+  Future<Response<T>> delete<T>({required String endPoint,}) async {
     try {
-      final response = await dio.delete(endPoint);
-      return Right(response);
+      final response = await dio.delete<T>(endPoint);
+      return response;
     } on DioException catch (e) {
-      return Left(ServerExceptions.handleError(e));
+      throw ServerExceptions.handleError(e);
     }
   }
 
